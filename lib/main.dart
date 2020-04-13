@@ -9,8 +9,8 @@ class HelloWorldApp extends StatelessWidget {
     return MaterialApp(
       theme: ThemeData(
         brightness: Brightness.light,
-        accentColor: Color.fromRGBO(255, 0, 0, 1),
-        textTheme: TextTheme(title: TextStyle(color: Colors.white)),
+        accentColor: const Color.fromRGBO(255, 0, 0, 1),
+        textTheme: const TextTheme(title: const TextStyle(color: Colors.white)),
       ),
       home: HomeScreen(),
     );

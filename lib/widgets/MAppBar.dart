@@ -1,6 +1,5 @@
+import 'package:cinema_app/globalVariables.dart';
 import 'package:flutter/material.dart';
-
-final double appBarHeight = 60;
 
 class MAppBar extends StatelessWidget with PreferredSizeWidget {
   @override
@@ -23,5 +22,5 @@ class MAppBar extends StatelessWidget with PreferredSizeWidget {
   }
 
   @override
-  Size get preferredSize => Size.fromHeight(appBarHeight);
+  Size get preferredSize => Size.fromHeight(heightAppBar);
 }
