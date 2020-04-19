@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:cinema_app/data/MenuLink.dart';
 
+import 'package:url_launcher/url_launcher.dart';
+
 class MMenuBar extends StatelessWidget {
   final data = <MenuLink>[
     MenuLink('Зараз у кіно'),
@@ -63,14 +65,22 @@ _phone() {
 
   return Padding(
     padding: EdgeInsets.symmetric(horizontal: 16.0, vertical: 16.0),
-    child: Wrap(
-      children: <Widget>[Icon(_icon), Text(_number)],
-      spacing: 10.0,
-      crossAxisAlignment: WrapCrossAlignment.center,
+    child: GestureDetector(
+      onTap: () => _call(_number),
+      child: Wrap(
+        children: <Widget>[Icon(_icon), Text(_number)],
+        spacing: 10.0,
+        crossAxisAlignment: WrapCrossAlignment.center,
+      ),
     ),
   );
 }
 
 void _onClick(name) {
   print(name);
+}
+
+void _call(String number) {
+  String _code = '38';
+  launch('tel:+$_code$number');
 }
