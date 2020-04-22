@@ -57,7 +57,7 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: MAppBar(),
+      appBar: MAppBar('Харків, Дафі', true),
       body: MFilmCardList(films),
       drawer: MMenuBar(),
     );

@@ -3,6 +3,7 @@ import 'package:cinema_app/widgets/MMIBDRating.dart';
 import 'package:flutter/material.dart';
 
 import '../globalVariables.dart';
+import 'OrderScreen.dart';
 
 class FilmScreen extends StatelessWidget {
   final Film film;
@@ -24,6 +25,8 @@ class FilmScreen extends StatelessWidget {
                 children: <Widget>[
                   MFilmCover(film.cover),
                   MMIBDRating(film.ratingMIBD),
+                  MSessionTimeList(
+                      ['11:00', '12:30', '14:40', '19:10', '23:40', '00:00']),
                   MFilmDescription(this.film)
                 ],
               ),
@@ -82,10 +85,6 @@ class MFilmCover extends StatelessWidget {
 }
 
 class MFilmDescription extends StatelessWidget {
-  static TextStyle fontSmallGray = TextStyle(
-      fontWeight: FontWeight.w600, color: Colors.black54, fontSize: 16);
-  static TextStyle fontH3 =
-      TextStyle(fontSize: 24, fontWeight: FontWeight.bold);
   final Film film;
 
   const MFilmDescription(this.film);
@@ -122,8 +121,7 @@ class MFilmDescription extends StatelessWidget {
                 Flexible(
                   child: Text(
                     film.description,
-                    style: const TextStyle(
-                        fontSize: 16, fontWeight: FontWeight.w500),
+                    style: fontP,
                   ),
                 )
               ],
@@ -172,6 +170,55 @@ class MFilmDescription extends StatelessWidget {
           ),
         )
       ]),
+    );
+  }
+}
+
+class MSessionTime extends StatelessWidget {
+  static TextStyle availableFont = const TextStyle(
+      fontWeight: FontWeight.w900, fontSize: 20, color: Colors.black);
+  static TextStyle unavailableFont = const TextStyle(
+      fontWeight: FontWeight.w900, fontSize: 20, color: Colors.black45);
+  final String time;
+  final bool isAvailable;
+
+  const MSessionTime(this.time, this.isAvailable);
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: () => (isAvailable ? _routing(context, time) : null),
+      child: Container(
+          alignment: Alignment.center,
+          child:
+              Text(time, style: isAvailable ? availableFont : unavailableFont)),
+    );
+  }
+
+  void _routing(BuildContext context, String time) {
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => OrderScreen(time)),
+    );
+  }
+}
+
+class MSessionTimeList extends StatelessWidget {
+  final List times;
+  const MSessionTimeList(this.times);
+
+  @override
+  Widget build(BuildContext context) {
+    return GridView.builder(
+      shrinkWrap: true,
+      padding: const EdgeInsets.only(left: 20, right: 20, bottom: 25, top: 5),
+      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+          crossAxisCount: 4,
+          mainAxisSpacing: 10,
+          crossAxisSpacing: 10,
+          childAspectRatio: 2),
+      itemBuilder: (_, index) => MSessionTime(times[index], true),
+      itemCount: times.length,
     );
   }
 }
