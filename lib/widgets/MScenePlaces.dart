@@ -1,6 +1,8 @@
 import 'dart:math';
 
+import 'package:cinema_app/redux/AppState.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_redux/flutter_redux.dart';
 
 class MPlace extends StatefulWidget {
   final int id;
@@ -26,7 +28,7 @@ class _MPlaceState extends State<MPlace> {
   _MPlaceState(this.id, this.numberPlace, this.isAvailable);
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext contextm) {
     return GestureDetector(
       onTap: () => isAvailable ? _toggleColor(id) : null,
       child: Container(
@@ -48,6 +50,11 @@ class _MPlaceState extends State<MPlace> {
     setState(() {
       _isSelect = !_isSelect;
     });
+    final store = StoreProvider.of<AppState>(context);
+    if (_isSelect)
+      store.dispatch($Actions.Increment);
+    else
+      store.dispatch($Actions.Deincrement);
   }
 }
 

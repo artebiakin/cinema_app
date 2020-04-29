@@ -9,4 +9,6 @@ const TextStyle fontP =
     const TextStyle(fontSize: 16, fontWeight: FontWeight.w500);
 const TextStyle fontH3 = TextStyle(fontSize: 24, fontWeight: FontWeight.bold);
 
-const Color colorAccent = const Color.fromRGBO(255, 0, 0, 1);
+const Color accentColor = const Color.fromRGBO(255, 0, 0, 1);
+
+const Color whiteColor = const Color.fromRGBO(255, 255, 255, 1);

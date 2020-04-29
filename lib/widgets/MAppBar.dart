@@ -5,7 +5,7 @@ class MAppBar extends StatelessWidget with PreferredSizeWidget {
   final String title;
   final bool isHome;
 
-  MAppBar(this.title, [this.isHome = false]);
+  MAppBar([this.title = '', this.isHome = false]);
 
   @override
   Widget build(BuildContext context) {
